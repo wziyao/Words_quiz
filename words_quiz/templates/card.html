@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<link rel="stylesheet" href="/static/styles.css"> 
+</head>
+
+<body background="static/background_stars.jpg">
+
+<p align='right'>
+<br>
+<a class='normal' href="{{ url_for('get_words', name=name, card_reset=False, quiz_reset=False) }}"> Back to Words List </a>
+</p>
+
+<h2 align="center" >Flash Card</h2>
+    
+<div id="divContent">
+
+{% if words_list %}
+  <br><br>
+  <h3 align="center" > {{ words_list.card_count }} </h3>
+  <br>
+  <h3 align="center" > {{ words_list.words[words_list.card_count-1].english_name }} </h3>
+  <h3 align="center" > {{ words_list.words[words_list.card_count-1].chinese_name }} </h3>
+  <br>
+  <p style="text-align: center">
+  <a class='normal' href="{{ url_for('get_flash_card', name=name) }}"> Next -> </a>
+  </p>
+
+{% else %}
+  <br><br>
+  <h3 align="center"> No more words </h3>
+{% endif %}
+
+</div>
+
+</body>

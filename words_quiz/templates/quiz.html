@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<link rel="stylesheet" href="/static/styles.css"> 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+	function show_answer(answer) {
+		$(answer_field).show();
+		$(answer_button).hide();
+	}
+</script>
+
+</head>
+
+<body background="static/background_stars.jpg">
+
+<p align='right'>
+<br>
+<a class='normal' href="{{ url_for('get_words', name=name, card_reset=False, quiz_reset=False) }}"> Back to Words List </a>
+</p>
+
+<h2 align="center" >Spelling Quiz</h2>
+    
+<div id="divContent">
+
+{% if quiz %}
+  <br><br>
+  {% if count != 0 %}
+  	<h3 align="center" > {{ count }} </h3>
+  {% endif %}
+  <br>
+  <h3 align="center" > {{ quiz }} </h3>
+
+  <br>
+
+  <h3 align="center" > <span id="answer_field" style="display: none;"> {{ answer }} </span></h3>
+
+
+
+  {% if count != 0 %}
+
+	<span id='answer_button'>
+  	<p style="text-align: center">	
+  		<a class='normal' href="javascript:show_answer('{{ answer }}');"> Show answer </a>
+  	</p>
+  	</span>
+
+  	<br>
+  	<p style="text-align: center">
+  	<a class='normal' href="{{ url_for('show_quiz', name=name) }}"> Next -> </a>
+  	</p>
+  {% endif %}
+
+{% else %}
+  <h1> No word! </h1>
+{% endif %}
+
+</div>
+
+</body>

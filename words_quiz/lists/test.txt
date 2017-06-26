@@ -1,0 +1,5 @@
+about 关于
+banana 香蕉
+car 汽车
+dog 狗
+eat 吃

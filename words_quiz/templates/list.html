@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<link rel="stylesheet" href="/static/styles.css"> 
+</head>
+
+<body background="static/background_stars.jpg">
+
+<br>
+<h1 align="center" >Words Lists</h1>
+<br>
+
+<div id="divContent">
+
+{% for name in lists %}
+	<a href="{{ url_for('get_words', name=name, card_reset=True, quiz_reset=True) }}"> <h3 align="center"> {{ name.decode('utf-8') }} </h3> </a>
+	<p style="text-align: center" >
+	<font color="white"> - </font>
+	</p>
+{% endfor %}
+
+</div>
+
+</body>
+</html>

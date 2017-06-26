@@ -1,0 +1,18 @@
+<!doctype html>
+<title>Hello from Flask</title>
+
+<head>
+<link rel="stylesheet" href="/static/styles.css"> 
+</head>
+
+<body background="static/background_stars.jpg">
+
+<br><br><br>
+
+{% if name %}
+  <h1 align="center">Hello {{ name }}!</h1>
+{% else %}
+  <h1 align="center">Hello World!</h1>
+{% endif %}
+
+</body>

@@ -1,0 +1,43 @@
+
+
+h1 {
+    color: white;
+    font-family: verdana;
+    font-size: 300%;
+}
+
+h2 {
+    color: white;
+    font-family: verdana;
+    font-size: 200%;
+}
+
+h3 {
+    color: white;
+    font-family: verdana;
+    font-size: 130%;
+}
+
+a.cover  {
+    color: lightblue;
+    font-family: courier;
+    font-size: 160%;
+}
+
+a.normal  {
+    color: lightblue;
+    font-family: courier;
+    font-size: 100%;
+}
+
+p.normal {
+	color: white;
+    font-size: 130%;
+}
+
+.centerTable { margin: 0px auto; }
+
+.leftTableHeader { style='text-align:left;' width="50%" height="30" }
+
+.leftTableCell { class='title' width="50%" height="30" }
+

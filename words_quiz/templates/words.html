@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<link rel="stylesheet" href="/static/styles.css"> 
+</head>
+
+<body background="static/background_stars.jpg">
+
+<p align='right'>
+<br>
+<a class='normal' href="{{ url_for('get_words_list') }}"> Back to Lists </a>
+</p>
+
+<h2 align="center" > {{ words.name.decode('utf-8') }} </h2>
+<h3 align="center" > {{ words.total }} words </h3>
+
+<br>
+<h3 align="center" > Learned = {{ words.card_count }} </h3>
+
+<table class="centerTable" width="30%">
+<tr height = "20">
+	<td width="50%" style="text-align: center;"> <a class='normal' href="{{ url_for('get_flash_card', name=words.name) }}"> Flash Cards </a> </td>
+	<td width="50%" style="text-align: center"> <a class='normal' href="{{ url_for('get_words', name=words.name, card_reset=True, quiz_reset=False) }}"> Reset Count </a> </td>
+</tr>
+</table>
+
+<br>
+<h3 align="center" > Quiz = {{ words.quiz_count }} </h3>
+
+<table class="centerTable" width="30%">
+<tr height = "20">
+	<td width="50%" style="text-align: center"> <a class='normal' href="{{ url_for('show_quiz', name=words.name, answer='') }}"> Spelling Quiz </a> </td>
+	<td width="50%" style="text-align: center"> <a class='normal' href="{{ url_for('get_words', name=words.name, card_reset=False, quiz_reset=True) }}"> Reset Count </a> </td>
+</tr>
+</table>
+    
+<br>
+<table class="centerTable">
+
+<tr `class='trlabel'><th class="leftTableHeader">English</th><th class="leftTableHeader">Chinese</th></tr>
+
+{% for word in words.words %}
+	<tr>
+	<td class='title' width="50%" height="30"> <font color='white'> {{ word.english_name }} </font></td>
+	<td class='title' width="50%" height="30"> <font color='white'>{{ word.chinese_name }} </font></td>
+	</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>
