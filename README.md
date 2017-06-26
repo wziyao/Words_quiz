@@ -8,7 +8,11 @@ The code is written in Python & Flask:
   - ./words_web.py
   
       the main web app.
+      
+  - ./words.py
   
+      the file for object classes definition.
+      
   - ./lists
   
       the folder to host source words list files in plain txt format with a .txt suffix. 
