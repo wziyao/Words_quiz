@@ -23,7 +23,7 @@ def get_words_lists():
 
   for file in files:
       if file.find('.txt'):
-        print file
+        print (file)
         names = file.split('.')
         names_list.append(names[0])
         WORDS.append(Words(names[0]))
@@ -71,8 +71,8 @@ def get_words(name=None, card_reset=False, quiz_reset=False):
   if len(request.args) > 0:
     words_list = None
     for words_list in WORDS:
-      print words_list.name
-      if words_list.name.decode('utf-8') == request.args['name']: break
+      print (words_list.name)
+      if words_list.name == request.args['name']: break
     
     if words_list:
       if request.args['card_reset']=='True': 
@@ -94,7 +94,7 @@ def show_quiz(name=None):
     name = request.args['name']
 
     for words_list in WORDS:
-      if words_list.name.decode('utf-8') == name: break
+      if words_list.name == name: break
 
     if words_list:
       if words_list.quiz_count == 0:
@@ -125,7 +125,7 @@ def show_answer(answer=None):
 
   if len(request.args) > 0:
     answer = request.args['answer']
-    print answer
+    print (answer)
     return jsonify({'answer': answer})
   else: return jsonify({'answer': ' '})
 
@@ -137,7 +137,7 @@ def get_flash_card(name=None):
     name = request.args['name']
 
     for words_list in WORDS:
-      if words_list.name.decode('utf-8') == name: break
+      if words_list.name == name: break
    
     if words_list:
       words_list.card_count += 1
@@ -153,7 +153,7 @@ def get_flash_card(name=None):
     return render_template('hello.html', name='No Word')
     
 if __name__ == '__main__':
-  print "initializing in main(): read in words..."
+  print ("initializing in main(): read in words...")
   names_list = get_words_lists()
 
   app.debug = True
