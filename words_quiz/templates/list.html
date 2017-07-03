@@ -3,23 +3,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<link rel="stylesheet" href="/static/styles.css"> 
+  <title>Words List</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="/static/jquery-3.2.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<body background="static/background_stars.jpg">
+<body>
 
-<br>
-<h1 align="center" >Words Lists</h1>
-<br>
+<div class="container-fluid">
 
-<div id="divContent">
+	<br>
+		<h1 align="center" >Words Lists</h1>
+	<br>
 
-{% for name in lists %}
-	<a href="{{ url_for('get_words', name=name, card_reset=True, quiz_reset=True) }}"> <h3 align="center"> {{ name }} </h3> </a>
-	<p style="text-align: center" >
-	<font color="white"> - </font>
-	</p>
-{% endfor %}
+
+	{% for name in lists %}
+		<div class="row">
+			<div class="col-lg-4" style="background-color:white;"> </div>
+			<div class="col-lg-4 col1 center-block text-center" style="background-color:white;">
+				<a href="{{ url_for('get_words', name=name, card_reset=True, quiz_reset=True) }}">
+				<button class="btn btn-link center-block" \> <h3> {{ name }} </h3> </button>
+				</a>
+			</div>
+			<div class="col-lg-4" style="background-color:white;"> </div>
+		</div>
+	{% endfor %}
 
 </div>
 
