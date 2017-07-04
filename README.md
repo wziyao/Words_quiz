@@ -3,7 +3,7 @@ This is a simple words quiz web app to help you learn and practice spelling a wo
 
 # File Structure:
 
-The code is written in Python & Flask:
+The code is written in Python 3.6.1 & Flask:
 
   - ./words_web.py
   
@@ -33,7 +33,7 @@ The code is written in Python & Flask:
       
       the app is using Flask default configuration, and you can access the app by http://localhost:5000
     
-  - words files was located at ./lsits folder. a wors list file consists multi-lines of wors with it's English and Chinese meaning.
+  - words files was located at ./lists folder. a wors list file consists multi-lines of wors with it's English and Chinese meaning.
   
         eg: banana 香蕉
     
