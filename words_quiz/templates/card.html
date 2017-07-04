@@ -4,9 +4,19 @@
 
 <head>
 <link rel="stylesheet" href="/static/styles.css"> 
+<script src="/static/jquery-3.2.1.min.js"></script>
+
+<script type="text/javascript">
+
+  function next_card() {
+    document.location.href="/card?name={{ name }}&direction=next";
+  };
+
+</script>
+
 </head>
 
-<body background="static/background_stars.jpg">
+<body bgcolor="#cce8cf" onkeypress="javascript:next_card()">
 
 <p align='right'>
 <br>
@@ -24,9 +34,21 @@
   <h3 align="center" > {{ words_list.words[words_list.card_count-1].english_name }} </h3>
   <h3 align="center" > {{ words_list.words[words_list.card_count-1].chinese_name }} </h3>
   <br>
-  <p style="text-align: center">
-  <a class='normal' href="{{ url_for('get_flash_card', name=name) }}"> Next -> </a>
-  </p>
+
+  <table class='centerTable' width="250">
+    <tr height = "40">
+      <td width="50%" align="center"> 
+        {% if words_list.card_count > 1 %}
+          <a class='normal' id="link_previous" href=" {{ url_for('get_flash_card', name=name, direction='previous') }}"> <- Previous </a>
+        {% endif %}
+      </td>
+      <td width="50%" align="center"> 
+        {% if words_list.card_count < words_list.total %}
+          <a class='normal' id="link_next" href="{{ url_for('get_flash_card', name=name, direction='next') }}"> Next -> </a>
+        {% endif %}
+      </td>
+    </tr>
+  </table>
 
 {% else %}
   <br><br>
