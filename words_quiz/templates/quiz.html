@@ -4,18 +4,35 @@
 
 <head>
 <link rel="stylesheet" href="/static/styles.css"> 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/static/jquery-3.2.1.min.js"></script>
 
 <script type="text/javascript">
-	function show_answer(answer) {
+
+	function show_answer() {
 		$(answer_field).show();
 		$(answer_button).hide();
-	}
+	};
+
+  function checkbox_value() {
+    if($(revisit_check).is(":checked")) {
+      url_next = "/quiz?name={{ name }}&revisit={{index}}"
+    } else {
+      url_next = "/quiz?name={{ name }}&revisit=-1"
+    }
+
+    document.getElementById("link_next").setAttribute("href", url_next);
+  };
+
+  function next_quiz() {
+    checkbox_value();
+    document.location.href=url_next;
+  }
+
 </script>
 
 </head>
 
-<body background="static/background_stars.jpg">
+<body bgcolor="#cce8cf" onkeypress="javascript:next_quiz()">
 
 <p align='right'>
 <br>
@@ -26,36 +43,40 @@
     
 <div id="divContent">
 
-{% if quiz %}
+{% if index != -1 %}
+
   <br><br>
   {% if count != 0 %}
   	<h3 align="center" > {{ count }} </h3>
+    <br>
+    <h3 align="center" > {{ words_list[index].quiz }} </h3>
   {% endif %}
-  <br>
-  <h3 align="center" > {{ quiz }} </h3>
 
   <br>
 
-  <h3 align="center" > <span id="answer_field" style="display: none;"> {{ answer }} </span></h3>
-
+  <div id="answer_field" style="display: none;">
+    <h3 align="center" >  {{ words_list[index].english_name }} </h3>
+    <br>
+    <p class='normal' align="center"> Revisit? <input id="revisit_check" type="checkbox" > </p>
+  </div>
 
 
   {% if count != 0 %}
-
-	<span id='answer_button'>
-  	<p style="text-align: center">	
-  		<a class='normal' href="javascript:show_answer('{{ answer }}');"> Show answer </a>
-  	</p>
+    <span id='answer_button'>
+  	 <p style="text-align: center">	
+  		  <a class='normal' href="javascript:show_answer();"> Show answer </a>
+  	 </p>
   	</span>
 
   	<br>
   	<p style="text-align: center">
-  	<a class='normal' href="{{ url_for('show_quiz', name=name) }}"> Next -> </a>
+  	<a class='normal' id="link_next" href=" " onclick="checkbox_value()"> Next -> </a>
   	</p>
   {% endif %}
 
 {% else %}
-  <h1> No word! </h1>
+    <br><br><br><br><br>
+    <h3 align="center" > End of Quiz </h3>
 {% endif %}
 
 </div>

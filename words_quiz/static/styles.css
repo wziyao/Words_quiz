@@ -1,37 +1,43 @@
 
 
 h1 {
-    color: white;
+    color: black;
     font-family: verdana;
     font-size: 300%;
 }
 
 h2 {
-    color: white;
+    color: black;
     font-family: verdana;
     font-size: 200%;
 }
 
 h3 {
-    color: white;
+    color: black;
+    font-family: verdana;
+    font-size: 130%;
+}
+
+h3.link {
+    color: blue;
     font-family: verdana;
     font-size: 130%;
 }
 
 a.cover  {
-    color: lightblue;
+    color: blue;
     font-family: courier;
     font-size: 160%;
 }
 
 a.normal  {
-    color: lightblue;
+    color: blue;
     font-family: courier;
     font-size: 100%;
 }
 
 p.normal {
-	color: white;
+	color: black;
     font-size: 130%;
 }
 

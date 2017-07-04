@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/static/styles.css"> 
 </head>
 
-<body background="static/background_stars.jpg">
+<body bgcolor="#cce8cf">
 
 <p align='right'>
 <br>
@@ -21,7 +21,7 @@
 
 <table class="centerTable" width="30%">
 <tr height = "20">
-	<td width="50%" style="text-align: center;"> <a class='normal' href="{{ url_for('get_flash_card', name=words.name) }}"> Flash Cards </a> </td>
+	<td width="50%" style="text-align: center;"> <a class='normal' href="{{ url_for('get_flash_card', name=words.name, direction='next') }}"> Flash Cards </a> </td>
 	<td width="50%" style="text-align: center"> <a class='normal' href="{{ url_for('get_words', name=words.name, card_reset=True, quiz_reset=False) }}"> Reset Count </a> </td>
 </tr>
 </table>
@@ -31,20 +31,21 @@
 
 <table class="centerTable" width="30%">
 <tr height = "20">
-	<td width="50%" style="text-align: center"> <a class='normal' href="{{ url_for('show_quiz', name=words.name, answer='') }}"> Spelling Quiz </a> </td>
+	<td width="50%" style="text-align: center"> <a class='normal' href="{{ url_for('show_quiz', name=words.name, revisit=-1) }}"> Spelling Quiz </a> </td>
 	<td width="50%" style="text-align: center"> <a class='normal' href="{{ url_for('get_words', name=words.name, card_reset=False, quiz_reset=True) }}"> Reset Count </a> </td>
 </tr>
 </table>
     
-<br>
-<table class="centerTable">
+<br><br><br>
 
-<tr `class='trlabel'><th class="leftTableHeader">English</th><th class="leftTableHeader">Chinese</th></tr>
+<table class="centerTable" width="30%">
+
+<tr `class='trlabel'><th class="leftTableHeader" height="40" >English</th><th class="leftTableHeader">Chinese</th></tr>
 
 {% for word in words.words %}
 	<tr>
-	<td class='title' width="50%" height="30"> <font color='white'> {{ word.english_name }} </font></td>
-	<td class='title' width="50%" height="30"> <font color='white'>{{ word.chinese_name }} </font></td>
+	<td class='title' width="50%" height="30" align="center"> <font color='black'> {{ word.english_name }} </font></td>
+	<td class='title' width="50%" height="30" align="center"> <font color='black'>{{ word.chinese_name }} </font></td>
 	</tr>
 {% endfor %}
 

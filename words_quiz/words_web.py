@@ -13,7 +13,6 @@ from words import Word, Words
 
 
 WORDS = []
-QUIZ_WORDS = []
 
 # read in lists of words from file system
 def get_words_lists():
@@ -80,6 +79,8 @@ def get_words(name=None, card_reset=False, quiz_reset=False):
 
       if request.args['quiz_reset']=='True': 
         words_list.quiz_count = 0
+        for word in words_list.words:
+          word.revisit_quiz = True
 
       return render_template('words.html', words=words_list)
       
@@ -87,35 +88,37 @@ def get_words(name=None, card_reset=False, quiz_reset=False):
 
 # quiz page for a words list
 @app.route('/quiz')
-def show_quiz(name=None):
-  global QUIZ_WORDS
+def show_quiz(name=None, revisit=-1):
 
   if len(request.args) > 0:
     name = request.args['name']
+    revisit = request.args['revisit']
 
     for words_list in WORDS:
       if words_list.name == name: break
 
     if words_list:
-      if words_list.quiz_count == 0:
-        QUIZ_WORDS = []
-        for word in words_list.words:
-          QUIZ_WORDS.append(word)
 
-      if words_list.quiz_count < words_list.total:
-    
-        i = random.randint(0, len(QUIZ_WORDS)-1)
-        quiz_word = QUIZ_WORDS[i]
-        quiz_word.generate_quiz()
-        del(QUIZ_WORDS[i])
-        words_list.quiz_count += 1
-      
-        #print  i, words_list.name, words_list.total, words_list.quiz_count
+      if not revisit == '-1':
+        words_list.words[int(revisit)].revisit_quiz = True
+      else: words_list.quiz_count += 1
+
+      if words_list.quiz_count <= words_list.total:
+        i = random.randint(0, words_list.total-1)
+
+        while words_list.words[i].revisit_quiz == False:
+          i = random.randint(0, words_list.total-1)
+
+        print (words_list.quiz_count, ":", i, words_list.words[i].english_name, revisit)
+          
+        words_list.words[i].revisit_quiz = False
+        words_list.words[i].generate_quiz()
         
-        return render_template('quiz.html', quiz=quiz_word.quiz, answer=quiz_word.english_name, name=name, count=words_list.quiz_count)
+        return render_template('quiz.html', words_list=words_list.words, name=name, index=i, count= words_list.quiz_count)
 
       else: 
-        return render_template('quiz.html', quiz='End of Quiz',  answer='', name=name, count=0)
+        words_list.quiz_count -= 1
+        return render_template('quiz.html', words_list=words_list.words, name=name, index=-1, count= words_list.quiz_count)
 
     return render_template('hello.html', name='No Quiz')
 
@@ -131,19 +134,24 @@ def show_answer(answer=None):
 
 # flash card page for a lsit of words  
 @app.route('/card')
-def get_flash_card(name=None):
+def get_flash_card(name=None, direction='next'):
 
   if len(request.args) > 0:
     name = request.args['name']
+    direction = request.args['direction']
 
     for words_list in WORDS:
       if words_list.name == name: break
    
     if words_list:
-      words_list.card_count += 1
-      #print words_list.name, words_list.total, words_list.card_count
 
-      if words_list.card_count <= words_list.total:
+      if direction == 'next':
+        words_list.card_count += 1
+      else: words_list.card_count -= 1
+
+      print (direction, words_list.total, words_list.card_count)
+
+      if words_list.card_count <= words_list.total and words_list.card_count > 0:
         return render_template('card.html', words_list=words_list, name=name)
       else: 
         words_list.card_count -= 1
