@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/static/styles.css"> 
 </head>
 
-<body background="static/background_stars.jpg">
+<body bgcolor="#cce8cf">
 
 <br>
 <h1 align="center" >Words Lists</h1>
@@ -15,9 +15,9 @@
 <div id="divContent">
 
 {% for name in lists %}
-	<a href="{{ url_for('get_words', name=name, card_reset=True, quiz_reset=True) }}"> <h3 align="center"> {{ name }} </h3> </a>
+	<a href="{{ url_for('get_words', name=name, card_reset=True, quiz_reset=True) }}"> <h3 class="link" align="center" > {{ name }} </h3> </a>
 	<p style="text-align: center" >
-	<font color="white"> - </font>
+	<font color="blue"> - </font>
 	</p>
 {% endfor %}
 
